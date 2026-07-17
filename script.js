@@ -691,29 +691,43 @@ document.addEventListener('DOMContentLoaded', () => {
             btnIcon.className = 'fa-solid fa-circle-notch fa-spin btn-icon';
             formFeedback.className = 'form-feedback hidden';
 
-            // Simulate server request
-            setTimeout(() => {
+            // Web3Forms Integration (E-posta Gönderimi)
+            const formData = new FormData(contactForm);
+            
+            // Buraya https://web3forms.com/ sitesinden ücretsiz alacağınız Access Key'i yapıştırmanız yeterlidir:
+            formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY');
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    formFeedback.textContent = langData[currentLang]['form-success'];
+                    formFeedback.className = 'form-feedback success';
+                    contactForm.reset();
+                    contactForm.querySelectorAll('.form-control').forEach(input => {
+                        input.blur();
+                    });
+                } else {
+                    formFeedback.textContent = json.message || langData[currentLang]['form-error'];
+                    formFeedback.className = 'form-feedback error';
+                }
+            })
+            .catch(error => {
+                formFeedback.textContent = langData[currentLang]['form-error'];
+                formFeedback.className = 'form-feedback error';
+            })
+            .finally(() => {
                 submitBtn.disabled = false;
                 btnText.textContent = langData[currentLang]['form-send'];
                 btnIcon.className = 'fa-solid fa-paper-plane btn-icon';
                 
-                // Show Success Feedback
-                formFeedback.textContent = langData[currentLang]['form-success'];
-                formFeedback.className = 'form-feedback success';
-                
-                // Clear Form
-                contactForm.reset();
-                
-                // Remove floating labels behavior
-                contactForm.querySelectorAll('.form-control').forEach(input => {
-                    input.blur();
-                });
-                
-                // Hide feedback after 5 seconds
                 setTimeout(() => {
                     formFeedback.className = 'form-feedback hidden';
                 }, 5000);
-            }, 1800);
+            });
         });
     }
 

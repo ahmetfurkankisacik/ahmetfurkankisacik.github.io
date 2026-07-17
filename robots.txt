@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ahmetfurkankisacik.com/sitemap.xml

@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(contactForm);
             
             // Buraya https://web3forms.com/ sitesinden ücretsiz alacağınız Access Key'i yapıştırmanız yeterlidir:
-            formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY');
+            formData.append('access_key', 'b2205855-5f0c-4297-82bf-5a142ceaf702');
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',

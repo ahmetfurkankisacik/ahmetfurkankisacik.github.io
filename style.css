@@ -1616,6 +1616,9 @@ body.light-theme .sun-icon {
     .modal-links {
         flex-direction: column;
     }
+    .scroll-down {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {

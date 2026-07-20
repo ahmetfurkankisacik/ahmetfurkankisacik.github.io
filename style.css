@@ -2010,3 +2010,47 @@ body.light-theme .sun-icon {
         width: 110px;
     }
 }
+
+/* --- Easter Egg #1: Konami Banner --- */
+.konami-banner {
+    position: fixed;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-primary);
+    border-radius: 40px;
+    padding: 14px 28px;
+    z-index: 100000;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(12px);
+    pointer-events: none;
+}
+
+.konami-banner.active {
+    top: 30px;
+}
+
+.konami-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.konami-icon {
+    font-size: 2rem;
+}
+
+.konami-text strong {
+    display: block;
+    color: var(--accent-secondary);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.konami-text p {
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    margin: 0;
+}

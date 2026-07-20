@@ -957,6 +957,125 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- EASTER EGG #1: KONAMI CODE (Up Up Down Down Left Right Left Right B A) ---
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+
+    window.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in form inputs or terminal
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (key === konamiCode[konamiIndex].toLowerCase()) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                triggerKonamiEasterEgg();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+
+    const triggerKonamiEasterEgg = () => {
+        let konamiBanner = document.getElementById('konami-banner');
+        if (!konamiBanner) {
+            konamiBanner = document.createElement('div');
+            konamiBanner.id = 'konami-banner';
+            konamiBanner.className = 'konami-banner';
+            konamiBanner.innerHTML = `
+                <div class="konami-content">
+                    <span class="konami-icon">🎮</span>
+                    <div class="konami-text">
+                        <strong>GAMER &amp; DEVELOPER UNLOCKED!</strong>
+                        <p>Gizli Geliştirici Modunu Buldunuz! Tebrikler! 🎉</p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(konamiBanner);
+        }
+
+        konamiBanner.classList.add('active');
+        launchConfetti();
+
+        setTimeout(() => {
+            konamiBanner.classList.remove('active');
+        }, 5000);
+    };
+
+    // Lightweight Confetti Particle Canvas Burst
+    const launchConfetti = () => {
+        let canvas = document.getElementById('confetti-canvas');
+        if (canvas) canvas.remove();
+
+        canvas = document.createElement('canvas');
+        canvas.id = 'confetti-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '99999';
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const colors = ['#a855f7', '#06b6d4', '#22c55e', '#eab308', '#ef4444', '#ffffff'];
+
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                w: Math.random() * 10 + 5,
+                h: Math.random() * 10 + 5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: (Math.random() - 0.5) * 4,
+                vy: Math.random() * 5 + 3,
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 10
+            });
+        }
+
+        let animationFrame;
+        const render = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let activeCount = 0;
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+
+                if (p.y < canvas.height) activeCount++;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+            });
+
+            if (activeCount > 0) {
+                animationFrame = requestAnimationFrame(render);
+            } else {
+                cancelAnimationFrame(animationFrame);
+                canvas.remove();
+            }
+        };
+
+        render();
+
+        setTimeout(() => {
+            cancelAnimationFrame(animationFrame);
+            if (canvas) canvas.remove();
+        }, 6000);
+    };
+
     // --- INITIALIZE DEFAULT LANGUAGE STATE ---
     setLanguage(currentLang);
 });

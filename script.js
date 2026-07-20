@@ -2,6 +2,32 @@
    AHMET FURKAN KISACIK - PERSONAL WEBSITE JAVASCRIPT
    ========================================================================== */
 
+// --- EASTER EGG #2: F12 DEVELOPER CONSOLE SECRET MESSAGE & FUNCTIONS ---
+try {
+    console.log(
+        '%c  AFK.  %c  Ahmet Furkan Kısacık — Software Engineer  ',
+        'background: #a855f7; color: #ffffff; font-size: 16px; font-weight: bold; padding: 6px 12px; border-radius: 6px 0 0 6px;',
+        'background: #07050f; color: #06b6d4; font-size: 16px; font-weight: bold; padding: 6px 12px; border: 1px solid #a855f7; border-radius: 0 6px 6px 0;'
+    );
+    console.log(
+        '%cHey Developer / Recruiter! 👋\n%cKodlarımı ve mimarimi merak edip incelediğin için teşekkürler!\n\n📧 E-posta: ahmetfurkankisacik@gmail.com\n📱 WhatsApp: https://wa.me/905539280996\n🌐 Web: https://ahmetfurkankisacik.com\n\n💡 İpucu: Konsola %chire()%c yazarak iletişim formuna gidebilirsin!',
+        'color: #06b6d4; font-size: 15px; font-weight: bold; margin-top: 8px;',
+        'color: #cbd5e1; font-size: 13px; line-height: 1.6;',
+        'color: #22c55e; font-weight: bold; font-family: monospace;',
+        'color: #cbd5e1;'
+    );
+
+    // Global console interactive function: hire()
+    window.hire = function() {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+        console.log('%c☕ PERMISSION GRANTED! Kahveniz demleniyor, iletişim bölümü açıldı!', 'color: #22c55e; font-size: 14px; font-weight: bold;');
+        return "🟢 Redirecting to contact section...";
+    };
+} catch (err) {
+    // Silent catch
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- LANGUAGE DICTIONARY ---
     const langData = {

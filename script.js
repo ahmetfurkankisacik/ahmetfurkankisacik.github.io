@@ -787,8 +787,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const openTerminal = () => {
         if (terminalModal) {
             terminalModal.classList.remove('hidden');
+            terminalModal.style.display = 'flex';
             setTimeout(() => {
-                terminalInput.focus();
+                if (terminalInput) terminalInput.focus();
             }, 100);
         }
     };
@@ -796,6 +797,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeTerminal = () => {
         if (terminalModal) {
             terminalModal.classList.add('hidden');
+            terminalModal.style.display = 'none';
         }
     };
 

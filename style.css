@@ -1805,7 +1805,7 @@ body.light-theme .sun-icon {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 998;
+    z-index: 9999;
     backdrop-filter: var(--glass-blur);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-bounce);
@@ -1826,7 +1826,7 @@ body.light-theme .sun-icon {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1050;
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;

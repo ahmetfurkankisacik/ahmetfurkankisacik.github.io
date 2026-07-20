@@ -772,6 +772,189 @@ document.addEventListener('DOMContentLoaded', () => {
         animatedElements.forEach(el => el.classList.add('animated'));
     }
 
+    // --- INTERACTIVE DEVELOPER TERMINAL LOGIC ---
+    const terminalToggleBtn = document.getElementById('terminal-toggle-btn');
+    const terminalModal = document.getElementById('terminal-modal');
+    const terminalBackdrop = document.getElementById('terminal-backdrop');
+    const terminalClose = document.getElementById('terminal-close');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalBody = document.getElementById('terminal-body');
+
+    let cmdHistory = [];
+    let historyIndex = -1;
+
+    const openTerminal = () => {
+        if (terminalModal) {
+            terminalModal.classList.remove('hidden');
+            setTimeout(() => {
+                terminalInput.focus();
+            }, 100);
+        }
+    };
+
+    const closeTerminal = () => {
+        if (terminalModal) {
+            terminalModal.classList.add('hidden');
+        }
+    };
+
+    if (terminalToggleBtn) terminalToggleBtn.addEventListener('click', openTerminal);
+    if (terminalClose) terminalClose.addEventListener('click', closeTerminal);
+    if (terminalBackdrop) terminalBackdrop.addEventListener('click', closeTerminal);
+
+    // Keyboard shortcut (Ctrl + ~ or Cmd + ~)
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+            e.preventDefault();
+            if (terminalModal && terminalModal.classList.contains('hidden')) {
+                openTerminal();
+            } else {
+                closeTerminal();
+            }
+        }
+    });
+
+    const appendTerminalLine = (htmlContent) => {
+        const line = document.createElement('div');
+        line.innerHTML = htmlContent;
+        terminalOutput.appendChild(line);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    };
+
+    const escapeHtml = (text) => {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    };
+
+    const processCommand = (rawCmd) => {
+        const cmd = rawCmd.trim().toLowerCase();
+        if (!cmd) return;
+
+        // Add command line to history output
+        appendTerminalLine(`<div class="term-line-cmd"><span class="prompt">afk@portfolio:~$</span> <span class="cmd-text">${escapeHtml(rawCmd)}</span></div>`);
+
+        cmdHistory.push(rawCmd);
+        historyIndex = cmdHistory.length;
+
+        switch (cmd) {
+            case 'help':
+                appendTerminalLine(`
+                    <div class="term-line-info">Kullanılabilir komutlar:</div>
+                    <div class="term-table"><span class="cmd-name">help</span> - Tüm komutların listesini gösterir.</div>
+                    <div class="term-table"><span class="cmd-name">about</span> - Ahmet'in mühendislik biyografisini yazar.</div>
+                    <div class="term-table"><span class="cmd-name">skills</span> - Yetenekler ve teknolojileri listeler.</div>
+                    <div class="term-table"><span class="cmd-name">projects</span> - Geliştirilen projeleri gösterir.</div>
+                    <div class="term-table"><span class="cmd-name">contact</span> - İletişim ve sosyal medya bağlantıları.</div>
+                    <div class="term-table"><span class="cmd-name">sudo hire ahmet</span> - 🟢 Şirketinize transfer edin! (Easter Egg)</div>
+                    <div class="term-table"><span class="cmd-name">clear</span> - Terminal ekranını temizler.</div>
+                `);
+                break;
+
+            case 'about':
+                appendTerminalLine(`
+                    <div class="term-line-info">
+                        <strong>Ahmet Furkan Kısacık</strong> - Bilgisayar Mühendisi &amp; Yazılım Geliştirici<br/>
+                        Burdur Mehmet Akif Ersoy Üniversitesi Bilgisayar Mühendisliği öğrencisi. 
+                        Akademik altyapısını yazılım eğitimi tecrübesi ve aktif bilişim sektöründeki saha deneyimi ile birleştirerek 
+                        sürdürülebilir ve yüksek kaliteli uygulamalar geliştiriyor.
+                    </div>
+                `);
+                break;
+
+            case 'skills':
+                appendTerminalLine(`
+                    <div class="term-line-info">
+                        <span style="color:#a855f7; font-weight:bold;">[Backend]</span> Java, Spring Boot, Spring Security, Hibernate, Node.js<br/>
+                        <span style="color:#06b6d4; font-weight:bold;">[Frontend]</span> Next.js, React, TypeScript, JavaScript, HTML5/CSS3<br/>
+                        <span style="color:#22c55e; font-weight:bold;">[Cloud &amp; DevOps]</span> Docker, Kubernetes, AWS, GitOps (ArgoCD), CI/CD<br/>
+                        <span style="color:#eab308; font-weight:bold;">[Database]</span> PostgreSQL, MySQL, Prisma ORM, SQLite
+                    </div>
+                `);
+                break;
+
+            case 'projects':
+                appendTerminalLine(`
+                    <div class="term-line-info">
+                        1. <strong style="color:#06b6d4;">Toplu Sertifika Sistemi</strong> (Next.js, Prisma, Excel Parser) - Canlı: http://31.77.112.28/<br/>
+                        2. <strong style="color:#a855f7;">Pretier Homes</strong> (Spring Boot 3, React, JWT Security)<br/>
+                        3. <strong style="color:#22c55e;">School Management App</strong> (Java, Layered Architecture)<br/>
+                        4. <strong style="color:#eab308;">Vehicle Insurance App</strong> (Spring Boot REST API)
+                    </div>
+                `);
+                break;
+
+            case 'contact':
+                appendTerminalLine(`
+                    <div class="term-line-info">
+                        📧 E-posta: ahmetfurkankisacik@gmail.com<br/>
+                        📱 Telefon / WhatsApp: +90 533 928 09 96<br/>
+                        🌐 Web: https://ahmetfurkankisacik.com<br/>
+                        💻 GitHub: https://github.com/ahmetfurkankisacik<br/>
+                        👔 LinkedIn: https://www.linkedin.com/in/afkdev
+                    </div>
+                `);
+                break;
+
+            case 'sudo hire ahmet':
+            case 'hire ahmet':
+            case 'hire':
+                appendTerminalLine(`
+                    <div class="term-line-success" style="font-size:1rem; font-weight:bold;">
+                        🟢 PERMISSION GRANTED! Mükemmel bir seçim yaptınız.<br/>
+                        Kahveniz taze demleniyor ☕... İletişim bölümüne yönlendiriliyorsunuz!
+                    </div>
+                `);
+                setTimeout(() => {
+                    closeTerminal();
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+                }, 1800);
+                break;
+
+            case 'clear':
+                terminalOutput.innerHTML = '';
+                break;
+
+            case 'matrix':
+                appendTerminalLine(`<div class="term-line-success">01000001 01000110 01001011 00100000 01000011 01001111 01000100 01000101 01010011</div>`);
+                break;
+
+            default:
+                appendTerminalLine(`<div class="term-line-error">command not found: ${escapeHtml(cmd)}. Type '<span style="color:#06b6d4;">help</span>' for available commands.</div>`);
+                break;
+        }
+    };
+
+    if (terminalInput) {
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = terminalInput.value;
+                processCommand(val);
+                terminalInput.value = '';
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (cmdHistory.length > 0 && historyIndex > 0) {
+                    historyIndex--;
+                    terminalInput.value = cmdHistory[historyIndex];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex < cmdHistory.length - 1) {
+                    historyIndex++;
+                    terminalInput.value = cmdHistory[historyIndex];
+                } else {
+                    historyIndex = cmdHistory.length;
+                    terminalInput.value = '';
+                }
+            }
+        });
+    }
+
     // --- INITIALIZE DEFAULT LANGUAGE STATE ---
     setLanguage(currentLang);
 });

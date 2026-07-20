@@ -1788,3 +1788,225 @@ body.light-theme .sun-icon {
     color: var(--accent-secondary);
     transform: translateX(4px);
 }
+
+/* --- Floating Terminal Toggle Button --- */
+.terminal-toggle-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 998;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-bounce);
+}
+
+.terminal-toggle-btn:hover {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: var(--glow-violet);
+    transform: scale(1.1) rotate(-10deg);
+}
+
+/* --- Terminal Modal & Window --- */
+.terminal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.terminal-backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(7, 5, 15, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.terminal-window {
+    position: relative;
+    width: 90%;
+    max-width: 760px;
+    height: 480px;
+    background-color: #07050f;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.2), 0 20px 50px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    z-index: 1060;
+    overflow: hidden;
+    font-family: 'Consolas', 'Fira Code', 'Monaco', 'Courier New', monospace;
+    animation: terminal-enter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.terminal-header {
+    background-color: #120e24;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.control-dot.close { background-color: #ff5f56; }
+.control-dot.minimize { background-color: #ffbd2e; }
+.control-dot.maximize { background-color: #27c93f; }
+
+.terminal-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+
+.terminal-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.terminal-output {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.term-welcome {
+    color: var(--accent-secondary);
+    font-weight: 700;
+}
+
+.term-help-hint {
+    color: #94a3b8;
+}
+
+.term-help-hint .highlight {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.term-prompt {
+    color: #06b6d4;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    flex-grow: 1;
+    caret-color: #06b6d4;
+}
+
+/* Terminal Line Formatting */
+.term-line-cmd {
+    color: #e2e8f0;
+}
+
+.term-line-cmd .prompt {
+    color: #06b6d4;
+    font-weight: 700;
+}
+
+.term-line-cmd .cmd-text {
+    color: #a855f7;
+    font-weight: 700;
+}
+
+.term-line-success {
+    color: #22c55e;
+}
+
+.term-line-error {
+    color: #ef4444;
+}
+
+.term-line-info {
+    color: #94a3b8;
+}
+
+.term-table {
+    margin: 4px 0;
+    color: #cbd5e1;
+}
+
+.term-table .cmd-name {
+    color: #06b6d4;
+    font-weight: 700;
+    display: inline-block;
+    width: 160px;
+}
+
+@keyframes terminal-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .terminal-toggle-btn {
+        bottom: 20px;
+        left: 20px;
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    .terminal-window {
+        width: 95%;
+        height: 400px;
+    }
+    .term-table .cmd-name {
+        width: 110px;
+    }
+}

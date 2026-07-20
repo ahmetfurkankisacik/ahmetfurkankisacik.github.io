@@ -697,6 +697,36 @@
         </div>
     </div>
 
+    <!-- Floating Terminal Toggle Button -->
+    <button id="terminal-toggle-btn" class="terminal-toggle-btn" aria-label="Terminali Aç/Kapat" title="Terminali Aç (Ctrl + ~)">
+        <i class="fa-solid fa-code"></i>
+    </button>
+
+    <!-- Interactive Developer Terminal Overlay -->
+    <div id="terminal-modal" class="terminal-modal hidden">
+        <div class="terminal-backdrop" id="terminal-backdrop"></div>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <span class="control-dot close" id="terminal-close" title="Kapat"></span>
+                    <span class="control-dot minimize" title="Simge Durumuna Küçült"></span>
+                    <span class="control-dot maximize" title="Ekranı Kapla"></span>
+                </div>
+                <div class="terminal-title"><i class="fa-solid fa-terminal"></i> afk@portfolio: ~ (bash)</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <div class="terminal-output" id="terminal-output">
+                    <p class="term-welcome">Hoş geldiniz! Ahmet Furkan Kısacık İnteraktif Konsolu [v1.0.0]</p>
+                    <p class="term-help-hint">Kullanılabilir komutları görmek için <span class="highlight">help</span> yazıp Enter'a basabilirsiniz.</p>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="term-prompt">afk@portfolio:~$</span>
+                    <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/905539280996" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile İletişime Geç">
         <i class="fa-brands fa-whatsapp"></i>

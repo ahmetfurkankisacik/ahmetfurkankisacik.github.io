@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-experience': 'Deneyim',
             'nav-projects': 'Projeler',
             'nav-seminars': 'Seminerler',
+            'nav-blog': 'Blog',
             'nav-contact': 'İletişim',
             
             // Hero
@@ -79,6 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'sem-4-title': 'Bilkent Üni. TEDx Katılımı',
             'sem-4-desc': 'TEDx Bilkent Üniversitesi programına katılarak inovasyon, liderlik ve teknolojik gelişimler üzerine farklı vizyonları takip etme şansı buldum.',
             
+            // Blog
+            'blog-title': 'Blog & Makaleler',
+            'article-1-title': 'Spring Boot 3 ve Spring Security 6 ile Rol Tabanlı Yetkilendirme (RBAC) ve JWT Mimarisi',
+            'article-1-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Pretier Homes projesinde katmanlı güvenlik, JWT token yönetimi ve rol tabanlı erişim kontrolünün adım adım kurgulanması.',
+            'blog-read-btn': 'Medium\'da Oku',
+            
             // References
             'references-title': 'Referanslar',
             'ref-role-data': 'Data Scientist & Profesör',
@@ -116,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav-experience': 'Experience',
             'nav-projects': 'Projects',
             'nav-seminars': 'Seminars',
+            'nav-blog': 'Blog',
             'nav-contact': 'Contact',
             
             // Hero
@@ -182,6 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
             'sem-3-desc': 'Gave a seminar to Mathematics Club students covering computing trends, development methodologies, and learning paths.',
             'sem-4-title': 'Bilkent Uni. TEDx Event',
             'sem-4-desc': 'Participated in the TEDx Bilkent University program, capturing perspectives on innovation, leadership, and tech growth.',
+            
+            // Blog
+            'blog-title': 'Blog & Articles',
+            'article-1-title': 'Role-Based Access Control (RBAC) and JWT Architecture with Spring Boot 3 & Spring Security 6',
+            'article-1-desc': 'From the perspective of an instructor and software engineer: Step-by-step setup of layered security, JWT token management, and role-based access control in the Pretier Homes project.',
+            'blog-read-btn': 'Read on Medium',
             
             // References
             'references-title': 'References',

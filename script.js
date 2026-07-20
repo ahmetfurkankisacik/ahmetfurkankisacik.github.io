@@ -958,22 +958,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- EASTER EGG #1: KONAMI CODE (Up Up Down Down Left Right Left Right B A) ---
-    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    const konamiSequence = [
+        ['ArrowUp'],
+        ['ArrowUp'],
+        ['ArrowDown'],
+        ['ArrowDown'],
+        ['ArrowLeft'],
+        ['ArrowRight'],
+        ['ArrowLeft'],
+        ['ArrowRight'],
+        ['b', 'KeyB'],
+        ['a', 'KeyA']
+    ];
     let konamiIndex = 0;
 
     window.addEventListener('keydown', (e) => {
         // Ignore if user is typing in form inputs or terminal
         if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
-        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-        if (key === konamiCode[konamiIndex].toLowerCase()) {
+        const currentMatch = konamiSequence[konamiIndex];
+        const keyLower = e.key ? e.key.toLowerCase() : '';
+        const codeVal = e.code || '';
+
+        const isMatch = currentMatch.some(expected => 
+            expected.toLowerCase() === keyLower || expected === codeVal || expected === e.key
+        );
+
+        if (isMatch) {
             konamiIndex++;
-            if (konamiIndex === konamiCode.length) {
+            if (konamiIndex === konamiSequence.length) {
                 triggerKonamiEasterEgg();
                 konamiIndex = 0;
             }
         } else {
-            konamiIndex = 0;
+            const matchesFirst = konamiSequence[0].some(expected => 
+                expected.toLowerCase() === keyLower || expected === codeVal || expected === e.key
+            );
+            konamiIndex = matchesFirst ? 1 : 0;
         }
     });
 

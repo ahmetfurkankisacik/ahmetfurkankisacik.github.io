@@ -1149,6 +1149,65 @@ document.addEventListener('DOMContentLoaded', () => {
         // Silent catch
     }
 
+    // --- EASTER EGG #3: LOGO TRIPLE CLICK SURPRISE ---
+    const brandLogo = document.getElementById('brand-logo');
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    const devQuotes = [
+        `"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler`,
+        `"First, solve the problem. Then, write the code." — John Johnson`,
+        `"Clean code always looks like it was written by someone who cares." — Robert C. Martin (Uncle Bob)`,
+        `"Simplicity is prerequisite for reliability." — Edsger W. Dijkstra`,
+        `"Süreçleri kodlayarak, geleceği şekillendiriyoruz." — Ahmet Furkan Kısacık`
+    ];
+
+    if (brandLogo) {
+        brandLogo.addEventListener('click', (e) => {
+            logoClickCount++;
+            clearTimeout(logoClickTimer);
+
+            if (logoClickCount === 3) {
+                e.preventDefault();
+                triggerLogoEasterEgg();
+                logoClickCount = 0;
+            } else {
+                logoClickTimer = setTimeout(() => {
+                    logoClickCount = 0;
+                }, 800);
+            }
+        });
+    }
+
+    const triggerLogoEasterEgg = () => {
+        let logoModal = document.getElementById('logo-easter-egg');
+        if (!logoModal) {
+            logoModal = document.createElement('div');
+            logoModal.id = 'logo-easter-egg';
+            logoModal.className = 'logo-easter-modal';
+            document.body.appendChild(logoModal);
+        }
+
+        const randomQuote = devQuotes[Math.floor(Math.random() * devQuotes.length)];
+
+        logoModal.innerHTML = `
+            <div class="logo-easter-card">
+                <span class="logo-easter-badge">⚡ GİZLİ MÜHENDİSLİK SÖZÜ</span>
+                <p class="logo-easter-quote">${escapeHtml(randomQuote)}</p>
+                <div class="logo-easter-footer">
+                    <span>👑 AFK Secret Explorer Badge Unlocked!</span>
+                    <button id="logo-easter-close" class="btn-easter-close">Harika! 🚀</button>
+                </div>
+            </div>
+        `;
+
+        logoModal.classList.add('active');
+
+        document.getElementById('logo-easter-close').addEventListener('click', () => {
+            logoModal.classList.remove('active');
+        });
+    };
+
     // --- INITIALIZE DEFAULT LANGUAGE STATE ---
     setLanguage(currentLang);
 });

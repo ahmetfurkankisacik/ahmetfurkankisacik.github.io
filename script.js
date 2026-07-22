@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'hero-desc': 'Yazılım eğitimi sektöründeki eğitmenlik tecrübemin ardından, aktif yazılım dünyasında modern ve ölçeklenebilir çözümler geliştiriyorum. Mikroservis mimarileri ve bulut teknolojileri üzerine odaklanıyorum.',
             'hero-btn-projects': 'Projeleri Gör',
             'hero-btn-contact': 'İletişime Geç',
+            'hero-btn-cv': 'CV / Özgeçmiş',
             
             // About
             'about-title': 'Hakkımda',
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'hero-desc': 'Following my training experience in the software education sector, I develop modern and scalable solutions in the active software world. Focusing on microservices and cloud technologies.',
             'hero-btn-projects': 'View Projects',
             'hero-btn-contact': 'Contact Me',
+            'hero-btn-cv': 'Resume / CV',
             
             // About
             'about-title': 'About Me',

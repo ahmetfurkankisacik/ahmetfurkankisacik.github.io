@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmet Furkan Kısacık — CV / Özgeçmiş (Software Engineer)</title>
+    <meta name="description" content="Ahmet Furkan Kısacık - Bilgisayar Mühendisi & Yazılım Geliştirici Özgeçmiş (CV)">
+    <meta name="robots" content="index, follow">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #07050f;
+            --accent: #a855f7;
+            --accent-cyan: #06b6d4;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .cv-actions {
+            max-width: 800px;
+            margin: 0 auto 24px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-back {
+            background-color: #ffffff;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-back:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-cyan) 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .cv-paper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 48px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cv-header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .cv-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .cv-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .cv-contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .cv-contact-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cv-contact-info a:hover {
+            color: var(--accent);
+        }
+
+        .cv-section {
+            margin-bottom: 24px;
+        }
+
+        .cv-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+        }
+
+        .cv-summary {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        .cv-skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .cv-skill-item strong {
+            color: #0f172a;
+            width: 170px;
+            display: inline-block;
+        }
+
+        .cv-job {
+            margin-bottom: 16px;
+        }
+
+        .cv-job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .cv-job-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .cv-company {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cv-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .cv-job-list {
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .cv-job-list li {
+            margin-bottom: 6px;
+        }
+
+        .cv-project {
+            margin-bottom: 14px;
+        }
+
+        .cv-project-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .cv-project-desc {
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+                color: #000000;
+            }
+            .cv-actions {
+                display: none !important;
+            }
+            .cv-paper {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .cv-contact-info a {
+                color: #000000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-actions">
+        <a href="index.html" class="btn-action btn-back"><i class="fa-solid fa-arrow-left"></i> Ana Sayfaya Dön</a>
+        <button onclick="window.print()" class="btn-action btn-print"><i class="fa-solid fa-print"></i> PDF Olarak İndir / Yazdır</button>
+    </div>
+
+    <main class="cv-paper">
+        <!-- Header -->
+        <header class="cv-header">
+            <h1 class="cv-name">AHMET FURKAN KISACIK</h1>
+            <div class="cv-title">Bilgisayar Mühendisi &amp; Yazılım Geliştirici</div>
+            <div class="cv-contact-info">
+                <span><i class="fa-solid fa-globe"></i> <a href="https://ahmetfurkankisacik.com" target="_blank">ahmetfurkankisacik.com</a></span>
+                <span><i class="fa-solid fa-envelope"></i> <a href="mailto:ahmetfurkankisacik@gmail.com">ahmetfurkankisacik@gmail.com</a></span>
+                <span><i class="fa-solid fa-phone"></i> +90 553 928 09 96</span>
+                <span><i class="fa-brands fa-github"></i> <a href="https://github.com/ahmetfurkankisacik" target="_blank">github.com/ahmetfurkankisacik</a></span>
+                <span><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/afkdev" target="_blank">linkedin.com/in/afkdev</a></span>
+                <span><i class="fa-solid fa-location-dot"></i> Burdur / Antalya, Türkiye</span>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Profesyonel Özet</h2>
+            <p class="cv-summary">
+                Eğitmenlik altyapısını aktif yazılım geliştirme saha deneyimi ile birleştiren <strong>Bilgisayar Mühendisi</strong>. 
+                <strong>Java / Spring Boot</strong> ekosisteminde güvenli (JWT, RBAC), katmanlı ve ölçeklenebilir arka plan (backend) mimarileri; 
+                <strong>Next.js &amp; React</strong> ile performans odaklı ön yüz (frontend) sistemleri geliştirmektedir. 
+                100+ öğrenciye yazılım mimarisi eğitimi vermiş, topluluk seminerlerinde konuşmacı olarak yer almıştır. 
+                Yakın vadeli hedefi; event-driven mikroservis mimarileri (Kafka/RabbitMQ) ve Kubernetes tabanlı GitOps (ArgoCD) süreçlerinde uzmanlaşmaktır.
+            </p>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Teknik Yetkinlikler</h2>
+            <div class="cv-skills-grid">
+                <div class="cv-skill-item"><strong>Programlama Dilleri:</strong> Java, JavaScript (ES6+), TypeScript, SQL, HTML5, CSS3</div>
+                <div class="cv-skill-item"><strong>Backend &amp; Mimari:</strong> Spring Boot 3, Spring Security 6, Spring Data JPA, Hibernate, RESTful API, Microservices, JWT, RBAC</div>
+                <div class="cv-skill-item"><strong>Frontend Frameworks:</strong> Next.js 14, React.js, TailwindCSS, Glassmorphism UI, Responsive Web Design</div>
+                <div class="cv-skill-item"><strong>Veritabanı &amp; ORM:</strong> PostgreSQL, MySQL, Prisma ORM, SQLite, Redis</div>
+                <div class="cv-skill-item"><strong>DevOps &amp; Araçlar:</strong> Docker, Kubernetes (Basics), Git, GitHub Actions, Linux (Bash), Postman, Maven</div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">İş ve Staj Deneyimi</h2>
+            
+            <div class="cv-job">
+                <div class="cv-job-header">
+                    <div class="cv-job-title">Yazılım Mühendisliği Stajyeri — <span class="cv-company">Pegas Turizm</span></div>
+                    <div class="cv-date">Temmuz 2026 — Halen | Antalya</div>
+                </div>
+                <ul class="cv-job-list">
+                    <li>Kurumsal turizm otomasyon sistemlerinin backend servislerinin optimize edilmesinde ve veritabanı sorgu performanslarının artırılmasında aktif rol almaktadır.</li>
+                    <li>Spring Boot tabanlı RESTful API uç noktalarının tasarımı ve güvenli veri iletişimi süreçlerine katkı sağlamaktadır.</li>
+                </ul>
+            </div>
+
+            <div class="cv-job">
+                <div class="cv-job-header">
+                    <div class="cv-job-title">Yazılım Eğitmeni &amp; Asistan — <span class="cv-company">Techpro Education</span></div>
+                    <div class="cv-date">2023 — 2025 | Remote</div>
+                </div>
+                <ul class="cv-job-list">
+                    <li>100'den fazla öğrenciye Java, Nesne Yönelimli Programlama (OOP), Katmanlı Mimari ve Spring Framework temellerini uygulamalı projeler üzerinden aktardı.</li>
+                    <li>Öğrencilerin kod incelemelerini (Code Review) yaparak Clean Code ve SOLID prensiplerine uygun kod yazma alışkanlığı kazanmalarını sağladı.</li>
+                    <li>Spring Security 6 ve JWT tabanlı rol yetkilendirme mimarisini (RBAC) canlı derslerde örnek projelerle anlattı.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Projects -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Öne Çıkan Projeler</h2>
+            
+            <div class="cv-project">
+                <div class="cv-project-title">Toplu Sertifika Üretim ve Doğrulama Sistemi (Next.js 14, Prisma ORM, Excel Parser)</div>
+                <div class="cv-project-desc">Excel dosyalarındaki yüzlerce katılımcı verisini anlık okuyup PDF sertifikaları toplu üreten web uygulamasını geliştirdi. Sertifika teslim sürelerini <strong>%85 oranında kısalttı</strong>. (Canlı Demo: <a href="http://31.77.112.28/" target="_blank">31.77.112.28</a>)</div>
+            </div>
+
+            <div class="cv-project">
+                <div class="cv-project-title">Pretier Homes — Kurumsal Emlak Otomasyonu (Spring Boot 3, React, Spring Security 6, JWT)</div>
+                <div class="cv-project-desc">Admin, Agent ve Customer rollerine özel katmanlı güvenlik mimarisini (RBAC) ve OncePerRequestFilter tabanlı JWT token yönetimini kurguladı. DTO Pattern ile veritabanı izolasyonunu sağladı.</div>
+            </div>
+
+            <div class="cv-project">
+                <div class="cv-project-title">Araç Sigorta Teklif &amp; Yönetim Sistemi (Spring Boot, REST API, PostgreSQL)</div>
+                <div class="cv-project-desc">Araç profili ve sürücü kaza geçmişine dayalı dinamik prim hesaplaması yapan RESTful servislerini geliştirdi.</div>
+            </div>
+        </section>
+
+        <!-- Education & Activities -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Eğitim ve Etkinlikler</h2>
+            <div class="cv-job">
+                <div class="cv-job-header">
+                    <div class="cv-job-title">Bilgisayar Mühendisliği (Lisans) — <span class="cv-company">Burdur Mehmet Akif Ersoy Üniversitesi</span></div>
+                    <div class="cv-date">2022 — Halen</div>
+                </div>
+            </div>
+            <div class="cv-project-desc" style="margin-top: 8px;">
+                <strong>Konuşmacı &amp; Seminer:</strong> MAKÜ Siber Güvenlik ve Yazılım Kulübü Seminerinde (2024) <em>"Spring Boot İle Modern Backend Mimarileri ve Katmanlı Güvenlik"</em> konusunda 150+ öğrenciye konferans verdi.
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

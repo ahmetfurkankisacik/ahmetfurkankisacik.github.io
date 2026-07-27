@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Tasarımında Clean Architecture, DTO Pattern ve @RestControllerAdvice — Ahmet Furkan Kısacık</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --accent: #a855f7;
+            --dark: #0f172a;
+            --light-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --code-bg: #0f172a;
+            --code-text: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(168, 85, 247, 0.35);
+        }
+
+        .article-header {
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .article-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 32px 0 16px 0;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: #334155;
+        }
+
+        blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid var(--accent);
+            padding: 16px 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #475569;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.6;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #f1f5f9;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .header-actions {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+            }
+            pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <button class="btn-print" onclick="window.print()">🖨️ PDF Olarak İndir / Kaydet</button>
+        </div>
+
+        <header class="article-header">
+            <h1 class="article-title">REST API Tasarımında Clean Architecture, DTO Pattern ve @RestControllerAdvice İle Global Exception Handling</h1>
+            <p class="article-subtitle">Spring Boot projelerinde katmanlı mimari ilkeleri, veri izolasyonu ve sürdürülebilir hata yönetimi standartları.</p>
+            
+            <div class="author-card">
+                <div class="author-avatar">AFK</div>
+                <div class="author-info">
+                    <h4>Ahmet Furkan Kısacık</h4>
+                    <p>Computer Engineer &amp; Full Stack Developer Instructor — ahmetfurkankisacik.com</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <p>Spring Boot ile kurumsal veya bireysel bir REST API projesine başlarken en sık yapılan iki kritik hata vardır:</p>
+            <ol>
+                <li>Veritabanı tablolarımızı temsil eden <code>@Entity</code> sınıflarımızı doğrudan istemciye (React, Next.js, Mobile) yanıt olarak dönmek.</li>
+                <li>Servislerde oluşan hataları (Örn: <em>Kullanıcı bulunamadı</em>, <em>Bakiye yetersiz</em>) Controller katmanında <code>try-catch</code> blokları arasına hapsedip kod kirliliği yaratmak.</li>
+            </ol>
+
+            <blockquote>
+                "İyi bir mimari; sadece sistem çalışırken değil, sistemde beklenmedik bir hata oluştuğunda bile istemciye ne olduğunu anlaşılır ve standart bir dilde söyleyebilen mimaridir."
+            </blockquote>
+
+            <p>Bu makalede, katmanlı mimari prensiplerini koruyarak DTO (Data Transfer Object) desenini ve <code>@RestControllerAdvice</code> ile merkezi hata yönetimini adım adım kuracağız.</p>
+
+            <h2>1. Veritabanı Entity'lerini Neden Dışarıya Açmamalıyız?</h2>
+            <p>Bir <code>@Entity</code> sınıfını Controller uç noktasından yanıt olarak döndüğümüzde şu 3 temel riskle karşılaşırız:</p>
+            <ul>
+                <li><strong>Güvenlik Zafiyeti (Data Leakage &amp; Over-Posting):</strong> Kullanıcının <code>passwordHash</code>, <code>tckn</code> veya <code>failedLoginCount</code> gibi verileri dış dünyaya sızar.</li>
+                <li><strong>Sonsuz Döngü (Circular Dependency):</strong> JPA ilişkilerinde Jackson kütüphanesi JSON dönüştürürken <code>StackOverflowError</code> fırlatır.</li>
+                <li><strong>Gevşek Bağlantı İhlali:</strong> Veritabanında bir kolonun adını değiştirdiğiniz an istemcinin kullandığı API sözleşmesi kırılır.</li>
+            </ul>
+
+            <h3>❌ Kötü Pratik (Bad Practice):</h3>
+<pre><code>@GetMapping("/{id}")
+public UserEntity getUserById(@PathVariable Long id) {
+    return userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
+}</code></pre>
+
+            <h3>✅ İyi Pratik (Clean Code):</h3>
+<pre><code>@GetMapping("/{id}")
+public ResponseEntity&lt;UserResponseDto&gt; getUserById(@PathVariable Long id) {
+    UserResponseDto userDto = userService.getUserDtoById(id);
+    return ResponseEntity.ok(userDto);
+}</code></pre>
+
+            <h2>2. DTO ve Java Record İle Temiz Veri Akışı</h2>
+            <p>DTO katmanı sayesinde sadece dış dünyanın görmesi gereken alanları paketleriz. Java 17 ile gelen <code>record</code> yapısı değiştirilemez (immutable) veri taşıyıcısı sunar:</p>
+
+<pre><code>public record UserResponseDto(
+    Long id,
+    String firstName,
+    String lastName,
+    String email,
+    String role
+) {}</code></pre>
+
+            <h2>3. @RestControllerAdvice İle Merkezi Hata Yönetimi</h2>
+            <p>Spring Boot bize tüm Controller katmanını dinleyen AOP tabanlı <code>@RestControllerAdvice</code> ve <code>@ExceptionHandler</code> anotasyonlarını sunar.</p>
+
+            <h3>Standart Hata Yanıt Şemamız (ErrorDetails):</h3>
+<pre><code>public record ErrorDetails(
+    LocalDateTime timestamp,
+    int status,
+    String error,
+    String message,
+    String path
+) {}</code></pre>
+
+            <h3>Central Global Exception Handler Sınıfı:</h3>
+<pre><code>@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;ErrorDetails&gt; handleResourceNotFoundException(
+            ResourceNotFoundException ex, HttpServletRequest request) {
+        
+        ErrorDetails error = new ErrorDetails(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                "RESOURCE_NOT_FOUND",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        
+        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+        ex.getBindingResult().getFieldErrors().forEach(err -&gt; 
+            errors.put(err.getField(), err.getDefaultMessage())
+        );
+        return new ResponseEntity&lt;&gt;(errors, HttpStatus.BAD_REQUEST);
+    }
+}</code></pre>
+
+            <h2>4. Eğitmen Gözünden: En Sık Yapılan 3 Mimarisel Hata</h2>
+            <ol>
+                <li><strong>HTTP Status 200 Dönüp İçi Hata Formatlı JSON Vermek:</strong> HTTP 200 OK verip body içinde error dönmek anti-pattern'dir.</li>
+                <li><strong>Generic Exception Fırlatmak:</strong> Her yerde <code>RuntimeException</code> atmak yerine domain exception sınıfları kullanılmalıdır.</li>
+                <li><strong>Hassas Sistem Detayı Sızdırmak:</strong> Stack trace ve SQL sorgularını 500 hatalarında dışarı sızdırmamak gerekir.</li>
+            </ol>
+        </main>
+
+        <footer class="footer-note">
+            <p>© 2026 Ahmet Furkan Kısacık — Tüm Hakları Saklıdır. | Portfolyo: ahmetfurkankisacik.com</p>
+        </footer>
+    </div>
+</body>
+</html>

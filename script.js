@@ -111,6 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'blog-title': 'Blog & Makaleler',
             'article-1-title': 'Spring Boot 3 ve Spring Security 6 ile Rol Tabanlı Yetkilendirme (RBAC) ve JWT Mimarisi',
             'article-1-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Pretier Homes projesinde katmanlı güvenlik, JWT token yönetimi ve rol tabanlı erişim kontrolünün adım adım kurgulanması.',
+            'article-2-title': 'REST API Tasarımında Clean Architecture, DTO Pattern ve @RestControllerAdvice İle Global Exception Handling',
+            'article-2-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Spring Boot projelerinde katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile sürdürülebilir hata yönetimi standartları.',
             'blog-read-btn': 'Medium\'da Oku',
             
             // References
@@ -223,6 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'blog-title': 'Blog & Articles',
             'article-1-title': 'Role-Based Access Control (RBAC) and JWT Architecture with Spring Boot 3 & Spring Security 6',
             'article-1-desc': 'From the perspective of an instructor and software engineer: Step-by-step setup of layered security, JWT token management, and role-based access control in the Pretier Homes project.',
+            'article-2-title': 'Clean Architecture, DTO Pattern, and Global Exception Handling with @RestControllerAdvice in REST API Design',
+            'article-2-desc': 'From the perspective of an instructor and software engineer: Layered architecture principles, DTO data isolation, and sustainable exception handling standards in Spring Boot.',
             'blog-read-btn': 'Read on Medium',
             
             // References

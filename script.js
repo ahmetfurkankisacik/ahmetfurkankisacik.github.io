@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'contact-desc': 'Projeler, eğitimler, konuşmacı davetleri veya iş teklifleri için benimle dilediğiniz kanal üzerinden iletişime geçebilirsiniz. En kısa sürede dönüş sağlayacağım.',
             'contact-phone': 'Telefon',
             'contact-location': 'Konum',
+            'contact-location-val': 'Antalya, Türkiye',
             
             // Form
             'form-name': 'Adınız Soyadınız',
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'contact-desc': 'Feel free to contact me for projects, courses, speaker invitations, or business proposals. I will get back to you as soon as possible.',
             'contact-phone': 'Phone',
             'contact-location': 'Location',
+            'contact-location-val': 'Antalya, Turkey',
             
             // Form
             'form-name': 'Your Name',

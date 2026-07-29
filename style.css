@@ -479,6 +479,19 @@ body.light-theme .sun-icon {
     align-items: center;
     justify-content: center;
     transition: background-color var(--transition-smooth);
+    overflow: hidden;
+}
+
+.hero-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--border-radius-lg) - 3px);
+    transition: transform var(--transition-smooth);
+}
+
+.avatar-card:hover .hero-avatar-img {
+    transform: scale(1.06);
 }
 
 .avatar-initials {

@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'en': 'A Next.js application designed to generate bulk certificates for participants following corporate trainings. Users can upload an Excel sheet to simultaneously output PDF/Print-ready certificates containing custom logos, signatures, and titles for hundreds of attendees.'
             },
             img: 'images/sertifika_sistemi.jpg',
-            liveLink: 'http://31.77.112.28/'
+            liveLink: 'https://sertifikauret.com.tr'
         },
         'schoolmanagement': {
             title: 'School Management App',

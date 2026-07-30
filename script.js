@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Experience / Timeline
             'experience-title': 'Deneyim & Eğitim',
+            'cert-btk-title': 'BTK Akademi - Ağ Temelleri Sertifikası',
+            'cert-btk-desc': 'Ağ katmanları (OSI & TCP/IP), yönlendirme (routing), IP adresleme ve ağ altyapı mimarileri üzerine BTK Akademi çevrim içi uzmanlık eğitimini tamamlayarak sertifika almaya hak kazandı. (Sertifika No: 4qguejLvyw)',
             'exp-0-date': '10.2025 - Devam Ediyor',
             'exp-0-title': 'Yazılım Mühendisi Stajyeri',
             'exp-0-desc': 'Pegas Turizm bünyesinde kurumsal turizm teknolojileri, rezervasyon sistemleri ve aktif yazılım projelerinin geliştirilmesinde stajyer yazılım mühendisi olarak rol alıyorum.',
@@ -190,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Experience / Timeline
             'experience-title': 'Experience & Education',
+            'cert-btk-title': 'BTK Academy - Network Fundamentals Certificate',
+            'cert-btk-desc': 'Successfully completed BTK Academy online training on network layers (OSI & TCP/IP model), routing, IP addressing, and infrastructure architecture. (Certificate ID: 4qguejLvyw)',
             'exp-0-date': '10.2025 - Present',
             'exp-0-title': 'Software Engineer Intern',
             'exp-0-desc': 'Working as a Software Engineer Intern at Pegas Turizm. Participating in development workflows for enterprise-scale web applications and tourism technologies.',

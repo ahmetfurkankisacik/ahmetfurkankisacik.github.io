@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'Detayları Gör',
             'projects-more-git': 'Daha fazla projeye ve kod reposuna GitHub adresimden ulaşabilirsiniz.',
+            'proj-cleanarch-desc': 'Spring Boot 3 katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile küresel hata yönetimi standartları projesi.',
             'proj-pretier-desc': 'Modern gayrimenkul kiralama ve satın alma süreçlerini yöneten, tam kapsamlı emlak otomasyon web uygulaması.',
             'proj-cert-desc': 'Excel dosyalarından katılımcı listelerini okuyup toplu olarak özelleştirilmiş başarı ve katılım sertifikaları üreten web otomasyon sistemi.',
             'proj-school-desc': 'Öğrenci, öğretmen ve yönetim panellerini barındıran OOP prensiplerine sadık kalınarak yazılmış Java masaüstü/konsol uygulaması.',
@@ -209,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'View Details',
             'projects-more-git': 'You can find more projects and repositories on my GitHub page.',
+            'proj-cleanarch-desc': 'Spring Boot 3 layered architecture principles, DTO data isolation, and global exception handling standards project.',
             'proj-pretier-desc': 'A comprehensive real-estate automation web application managing modern property rentals and buying lifecycles.',
             'proj-cert-desc': 'A web automation system that reads attendee lists from Excel files and generates customized achievement and participation certificates in bulk.',
             'proj-school-desc': 'A desktop/console application designed around strict OOP principles, facilitating student, teacher, and class registries.',
@@ -595,6 +597,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PROJECT MODAL DATA & CONTROLS ---
     const projectDetails = {
+        'springcleanarch': {
+            title: 'Spring Boot 3 Clean Architecture & REST API Demo',
+            tech: 'Spring Boot 3, Clean Architecture, DTO Pattern, RestControllerAdvice, Validation, JPA',
+            role: {
+                'tr': 'Yazılım Mühendisi & Eğitmen',
+                'en': 'Software Engineer & Instructor'
+            },
+            desc: {
+                'tr': 'Bir eğitmen ve yazılım mühendisinin gözünden: Spring Boot projelerinde katmanlı mimari ilkeleri (Controller, Service, Repository), DTO veri izolasyonu ve @RestControllerAdvice ile sürdürülebilir global hata yönetimi standartlarını gösteren referans açık kaynak mimari projesidir.',
+                'en': 'A reference open-source architecture project demonstrating layered architecture principles (Controller, Service, Repository), DTO data isolation, and sustainable global exception handling standards with @RestControllerAdvice in Spring Boot 3.'
+            },
+            img: 'images/medium_article_2_cover.jpg',
+            liveLink: 'https://medium.com/@ahmetfurkankisacik/bir-e%C4%9Fitmen-ve-yaz%C4%B1l%C4%B1m-m%C3%BChendisinin-g%C3%B6z%C3%BCnden-spring-boot-projelerinde-katmanl%C4%B1-mimari-ilkeleri-66a9e5596352'
+        },
         'pretierhomes': {
             title: 'Pretier Homes',
             tech: 'Java, Spring Boot, Spring Security, Hibernate, PostgreSQL, React.js, Bootstrap',

@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'Detayları Gör',
             'projects-more-git': 'Daha fazla projeye ve kod reposuna GitHub adresimden ulaşabilirsiniz.',
+            'proj-telemetry-desc': 'Distributed Tracing (Micrometer/Zipkin), Prometheus & Grafana metrikleri ve ELK merkezi loglama mimarisine sahip izlenebilirlik suite projesi.',
             'proj-cloudvault-desc': 'Spring Cloud Gateway, OAuth2 & JWT Authorization Server ve Apache Kafka Retry/DLQ dayanıklılık mimarisine sahip mikroservis projesi.',
             'proj-cleanarch-desc': 'Spring Boot 3 katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile küresel hata yönetimi standartları projesi.',
             'proj-pretier-desc': 'Modern gayrimenkul kiralama ve satın alma süreçlerini yöneten, tam kapsamlı emlak otomasyon web uygulaması.',
@@ -217,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'View Details',
             'projects-more-git': 'You can find more projects and repositories on my GitHub page.',
+            'proj-telemetry-desc': 'Distributed Tracing with Micrometer/Zipkin, Prometheus & Grafana metrics, and centralized logging observability suite.',
             'proj-cloudvault-desc': 'Enterprise microservices project featuring Spring Cloud Gateway, OAuth2 & JWT Auth Server, and Apache Kafka Retry/DLQ resiliency patterns.',
             'proj-cleanarch-desc': 'Spring Boot 3 layered architecture principles, DTO data isolation, and global exception handling standards project.',
             'proj-pretier-desc': 'A comprehensive real-estate automation web application managing modern property rentals and buying lifecycles.',
@@ -607,6 +609,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PROJECT MODAL DATA & CONTROLS ---
     const projectDetails = {
+        'telemetryvault': {
+            title: 'TelemetryVault: Distributed Tracing & Centralized Observability Suite',
+            tech: 'Spring Boot 3.3, Micrometer Tracing, Zipkin, Prometheus, Grafana, ELK Stack, Docker Compose',
+            role: {
+                'tr': 'Dağıtık Sistemler & İzlenebilirlik Mimarısı',
+                'en': 'Distributed Systems & Observability Architect'
+            },
+            desc: {
+                'tr': 'Mikroservis mimarilerinde distributed tracing (Trace ID / Span ID), Zipkin ile istek takibi, Prometheus & Grafana metrik izleme ve merkezi log yönetimi sunan kurumsal izlenebilirlik projesidir.',
+                'en': 'An enterprise observability architecture providing distributed tracing with Trace/Span IDs via Micrometer & Zipkin, real-time metrics monitoring using Prometheus & Grafana, and centralized logging.'
+            },
+            img: 'images/backend_systems_cover.jpg',
+            liveLink: 'https://github.com/ahmetfurkankisacik/TelemetryVault-Observability'
+        },
         'cloudvault': {
             title: 'CloudVault-Security: Event-Driven Microservices & Kafka DLQ',
             tech: 'Spring Boot 3, Spring Cloud Gateway, OAuth2, JWT 0.12.5, Apache Kafka, Backoff Retry & DLQ, Docker Compose',

@@ -383,7 +383,22 @@
                 </div>
                 <!-- Projects Grid -->
                 <div class="projects-grid">
-                    <!-- Project 0: Spring Clean Architecture Demo -->
+                    <!-- Project 0: CloudVault Security -->
+                    <div class="project-card" data-category="springboot" data-project-id="cloudvault">
+                        <div class="project-img-wrapper">
+                            <img src="images/jwt_code_snapshot.jpg" alt="CloudVault Security Microservices" class="project-img">
+                            <div class="project-overlay">
+                                <span class="project-view-more" data-key="project-view">Detayları Gör</span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag">Spring Boot 3 / Microservices</span>
+                            <h3 class="project-card-title">CloudVault Security &amp; Kafka DLQ</h3>
+                            <p class="project-card-desc" data-key="proj-cloudvault-desc">Spring Cloud Gateway, OAuth2 &amp; JWT Authorization Server ve Apache Kafka Retry/DLQ dayanıklılık mimarisine sahip mikroservis projesi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 1: Spring Clean Architecture Demo -->
                     <div class="project-card" data-category="springboot" data-project-id="springcleanarch">
                         <div class="project-img-wrapper">
                             <img src="images/medium_article_2_cover.jpg" alt="Spring Boot Clean Architecture" class="project-img">
@@ -585,26 +600,26 @@
                         </div>
                     </article>
 
-                    <!-- Article 3 (Upcoming) -->
-                    <article class="blog-card blog-card-upcoming">
+                    <!-- Article 3 -->
+                    <article class="blog-card">
                         <div class="blog-card-header">
                             <span class="blog-tag">Event-Driven &amp; Kafka</span>
-                            <span class="blog-badge-upcoming"><i class="fa-solid fa-hourglass-start"></i> <span data-key="article-upcoming-badge">Yakında (3 Ağustos)</span></span>
+                            <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 8 min read</span>
                         </div>
                         <div class="blog-card-body">
                             <h3 class="blog-card-title">
-                                <span class="upcoming-title" data-key="article-3-title">
+                                <a href="https://medium.com/@ahmetfurkankisacik" target="_blank" rel="noopener" data-key="article-3-title">
                                     Spring Boot ve Apache Kafka İle Event-Driven Microservices: Asenkron Mesajlaşma ve Resiliency (Retry / DLQ) Mimarisi
-                                </span>
+                                </a>
                             </h3>
                             <p class="blog-card-desc" data-key="article-3-desc">
-                                Bir eğitmen ve yazılım mühendisinin gözünden: Asenkron mesajlaşma, Kafka Producer/Consumer yapıları, Retry ve Dead Letter Queue (DLQ) mimarileriyle ilgili dev rehber makalemiz 3 Ağustos Pazartesi günü yayınlanacaktır.
+                                Bir eğitmen ve yazılım mühendisinin gözünden: Asenkron mesajlaşma, Kafka Producer/Consumer yapıları, Retry ve Dead Letter Queue (DLQ) mimarileriyle ilgili dev rehber makalemiz yayında!
                             </p>
                         </div>
                         <div class="blog-card-footer">
-                            <span class="btn-upcoming">
-                                <span class="spinner-pulse"></span> <span data-key="article-upcoming-btn">Hazırlanıyor...</span>
-                            </span>
+                            <a href="https://medium.com/@ahmetfurkankisacik" target="_blank" rel="noopener" class="btn-read-more">
+                                <span data-key="blog-read-btn">Medium'da Oku</span> <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                         </div>
                     </article>
                 </div>
@@ -817,6 +832,6 @@
     </a>
 
     <!-- Custom JS -->
-    <script src="script.js?v=3.2"></script>
+    <script src="script.js?v=3.3"></script>
 </body>
 </html>

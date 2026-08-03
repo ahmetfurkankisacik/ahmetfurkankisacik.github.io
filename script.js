@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'Detayları Gör',
             'projects-more-git': 'Daha fazla projeye ve kod reposuna GitHub adresimden ulaşabilirsiniz.',
+            'proj-cloudvault-desc': 'Spring Cloud Gateway, OAuth2 & JWT Authorization Server ve Apache Kafka Retry/DLQ dayanıklılık mimarisine sahip mikroservis projesi.',
             'proj-cleanarch-desc': 'Spring Boot 3 katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile küresel hata yönetimi standartları projesi.',
             'proj-pretier-desc': 'Modern gayrimenkul kiralama ve satın alma süreçlerini yöneten, tam kapsamlı emlak otomasyon web uygulaması.',
             'proj-cert-desc': 'Excel dosyalarından katılımcı listelerini okuyup toplu olarak özelleştirilmiş başarı ve katılım sertifikaları üreten web otomasyon sistemi.',
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'article-2-title': 'REST API Tasarımında Clean Architecture, DTO Pattern ve @RestControllerAdvice İle Global Exception Handling',
             'article-2-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Spring Boot projelerinde katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile sürdürülebilir hata yönetimi standartları.',
             'article-3-title': 'Spring Boot ve Apache Kafka İle Event-Driven Microservices: Asenkron Mesajlaşma ve Resiliency (Retry / DLQ) Mimarisi',
-            'article-3-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Asenkron mesajlaşma, Kafka Producer/Consumer yapıları, Retry ve Dead Letter Queue (DLQ) mimarileriyle ilgili dev rehber makalemiz 3 Ağustos Pazartesi günü yayınlanacaktır.',
+            'article-3-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Asenkron mesajlaşma, Kafka Producer/Consumer yapıları, Retry ve Dead Letter Queue (DLQ) mimarileriyle ilgili dev rehber makalemiz yayında!',
             'article-upcoming-badge': 'Yakında (3 Ağustos)',
             'article-upcoming-btn': 'Hazırlanıyor...',
             'blog-read-btn': 'Medium\'da Oku',
@@ -214,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'filter-java': 'Pure Java',
             'project-view': 'View Details',
             'projects-more-git': 'You can find more projects and repositories on my GitHub page.',
+            'proj-cloudvault-desc': 'Enterprise microservices project featuring Spring Cloud Gateway, OAuth2 & JWT Auth Server, and Apache Kafka Retry/DLQ resiliency patterns.',
             'proj-cleanarch-desc': 'Spring Boot 3 layered architecture principles, DTO data isolation, and global exception handling standards project.',
             'proj-pretier-desc': 'A comprehensive real-estate automation web application managing modern property rentals and buying lifecycles.',
             'proj-cert-desc': 'A web automation system that reads attendee lists from Excel files and generates customized achievement and participation certificates in bulk.',
@@ -239,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'article-2-title': 'Clean Architecture, DTO Pattern, and Global Exception Handling with @RestControllerAdvice in REST API Design',
             'article-2-desc': 'From the perspective of an instructor and software engineer: Layered architecture principles, DTO data isolation, and sustainable exception handling standards in Spring Boot.',
             'article-3-title': 'Event-Driven Microservices with Spring Boot & Apache Kafka: Asynchronous Messaging & Resiliency (Retry / DLQ) Architecture',
-            'article-3-desc': 'From the perspective of an instructor and software engineer: A comprehensive guide on asynchronous messaging, Kafka Producers/Consumers, Retries, and Dead Letter Queues (DLQ) launching Monday, August 3.',
+            'article-3-desc': 'From the perspective of an instructor and software engineer: A comprehensive guide on asynchronous messaging, Kafka Producers/Consumers, Retries, and Dead Letter Queues (DLQ) is now live!',
             'article-upcoming-badge': 'Coming Soon (Aug 3)',
             'article-upcoming-btn': 'In Progress...',
             'blog-read-btn': 'Read on Medium',
@@ -601,6 +603,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PROJECT MODAL DATA & CONTROLS ---
     const projectDetails = {
+        'cloudvault': {
+            title: 'CloudVault-Security: Event-Driven Microservices & Kafka DLQ',
+            tech: 'Spring Boot 3, Spring Cloud Gateway, OAuth2, JWT 0.12.5, Apache Kafka, Backoff Retry & DLQ, Docker Compose',
+            role: {
+                'tr': 'Mikroservis & Güvenlik Mimarısı',
+                'en': 'Microservices & Security Architect'
+            },
+            desc: {
+                'tr': 'Spring Cloud Gateway reaktif yönlendirme, OAuth2/JWT yetkilendirme sunucusu ve Apache Kafka tabanlı asenkron mesajlaşma mimarisine sahip kurumsal mikroservis projesidir. Tüketici (Consumer) tarafında oluşan hataların kaybolmaması için Otomatik Tekrar Deneme (Backoff Retry) ve Dead Letter Queue (DLQ) karantina mekanizması kurgulanmıştır.',
+                'en': 'An enterprise microservices architecture featuring Spring Cloud Gateway, OAuth2/JWT Authorization Server, and Apache Kafka event-driven messaging. Implements Exponential Backoff Retry and Dead Letter Queue (DLQ) quarantine mechanisms to prevent message loss during processing failures.'
+            },
+            img: 'images/jwt_code_snapshot.jpg',
+            liveLink: 'https://github.com/ahmetfurkankisacik/CloudVault-Security'
+        },
         'springcleanarch': {
             title: 'Spring Boot 3 Clean Architecture & REST API Demo',
             tech: 'Spring Boot 3, Clean Architecture, DTO Pattern, RestControllerAdvice, Validation, JPA',

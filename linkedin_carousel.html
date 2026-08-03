@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>LinkedIn Carousel - CloudVault Security Kafka</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap');
+
+        @page {
+            size: 1080px 1350px;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #090d16;
+            color: #f1f5f9;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1350px;
+            page-break-after: always;
+            position: relative;
+            background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.15), transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15), transparent 40%),
+                        #090d16;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-badge {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .slide-number {
+            font-family: 'Fira Code', monospace;
+            font-size: 22px;
+            color: #94a3b8;
+        }
+
+        /* Main Content */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        .gradient-text-cyan {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-purple {
+            background: linear-gradient(135deg, #c084fc 0%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tech Badges */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .badge-item {
+            font-size: 22px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 16px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+
+        .badge-item.highlight {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+        }
+
+        /* Feature Cards */
+        .card-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 36px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-box-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .card-box-desc {
+            font-size: 24px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Code Snippet Box */
+        .code-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 28px;
+            font-family: 'Fira Code', monospace;
+            font-size: 20px;
+            color: #38bdf8;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* Bottom Footer */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #38bdf8;
+        }
+
+        .author-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .author-role {
+            font-size: 20px;
+            color: #64748b;
+        }
+
+        .swipe-hint {
+            font-size: 22px;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">CLOUDVAULT SECURITY</span>
+            <span class="slide-number">01 / 06</span>
+        </div>
+        <div class="slide-body">
+            <div style="font-size: 24px; font-weight: 700; color: #38bdf8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">Rehber &amp; Mimari Proje</div>
+            <h1 class="hero-title">Spring Boot 3 &amp; Apache Kafka İle <span class="gradient-text-cyan">Event-Driven Microservices</span></h1>
+            <p class="hero-subtitle">OAuth2 / JWT Authorization Server, Spring Cloud Gateway, Retry Backoff ve <span class="gradient-text-purple">Dead Letter Queue (DLQ)</span> Dayanıklılık Mimarisi</p>
+            
+            <div class="badge-grid">
+                <span class="badge-item highlight">Spring Boot 3.3</span>
+                <span class="badge-item highlight">Apache Kafka</span>
+                <span class="badge-item">OAuth2 / JWT</span>
+                <span class="badge-item">Spring Cloud Gateway</span>
+                <span class="badge-item">Docker Compose</span>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="author-info">
+                <img src="images/avatar.jpg" class="author-avatar" alt="AFK">
+                <div>
+                    <div class="author-name">Ahmet Furkan Kısacık</div>
+                    <div class="author-role">Bilgisayar Mühendisi &amp; Eğitmen</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Kaydırın ➔</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: ARCHITECTURE OVERVIEW -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">MİMARİ TASARIM</span>
+            <span class="slide-number">02 / 06</span>
+        </div>
+        <div class="slide-body">
+            <h2 class="hero-title" style="font-size: 52px;">Sistem Bileşenleri &amp; <span class="gradient-text-cyan">Veri Akışı</span></h2>
+            
+            <div class="card-box">
+                <div class="card-box-title">🌐 api-gateway (Port: 8080)</div>
+                <div class="card-box-desc">Spring Cloud Gateway (WebFlux) ile reaktif yönlendirme, oran sınırlama (Rate Limiting) ve merkezi log filtresi.</div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-box-title">🛡️ auth-service (Port: 8081)</div>
+                <div class="card-box-desc">Spring Security 6 &amp; JJWT 0.12.5 tabanlı OAuth2 Authorization Server. Access (15 dk) &amp; Refresh Token (7 gün) rotasyonu.</div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-box-title">⚡ vault-event-service (Port: 8082)</div>
+                <div class="card-box-desc">Apache Kafka Producer &amp; Consumer ile asenkron dosya ve güvenlik olayları yönetimi.</div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="author-info">
+                <div>
+                    <div class="author-name">ahmetfurkankisacik.com</div>
+                    <div class="author-role">Open Source GitHub Repository</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Kaydırın ➔</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: OAUTH2 & JWT SECURITY -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">STATELESS GÜVENLİK</span>
+            <span class="slide-number">03 / 06</span>
+        </div>
+        <div class="slide-body">
+            <h2 class="hero-title" style="font-size: 52px;">OAuth2 &amp; <span class="gradient-text-purple">JWT Dual-Token</span> Mimarisi</h2>
+            
+            <div class="card-box">
+                <div class="card-box-title">🔑 HMAC-SHA256 &amp; BCrypt Hashleme</div>
+                <div class="card-box-desc">Kullanıcı parolaları BCrypt ile veritabanında saklanır. JWT token'ları 256-bit gizli anahtar ile kriptografik olarak imzalanır.</div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-box-title">🔄 Dual Token Rotasyonu</div>
+                <div class="card-box-desc">Kısa ömürlü Access Token (15 dk) çalınma riskini azaltır; uzun ömürlü Refresh Token (7 gün) oturum sürekliliği sağlar.</div>
+            </div>
+
+            <div class="code-box">
+// Spring Security Stateless Session Policy
+http.sessionManagement(s -&gt; s
+    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="author-info">
+                <div>
+                    <div class="author-name">ahmetfurkankisacik.com</div>
+                    <div class="author-role">Security Architecture</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Kaydırın ➔</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: KAFKA RETRY & DLQ -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">RESILIENCY &amp; FAULT TOLERANCE</span>
+            <span class="slide-number">04 / 06</span>
+        </div>
+        <div class="slide-body">
+            <h2 class="hero-title" style="font-size: 52px;">Retry Backoff &amp; <span class="gradient-text-cyan">Dead Letter Queue (DLQ)</span></h2>
+            
+            <div class="card-box">
+                <div class="card-box-title">🔄 DefaultErrorHandler &amp; FixedBackoff</div>
+                <div class="card-box-desc">Consumer tarafında veritabanı kesintisi veya geçici hata alındığında mesaj kaybolmaz, sistem otomatik tekrar dener.</div>
+            </div>
+
+            <div class="card-box">
+                <div class="card-box-title">🚨 Karantina Konusu: file-vault-events.DLQ</div>
+                <div class="card-box-desc">3 deneme sonunda düzelmeyen mesajlar DeadLetterPublishingRecoverer ile DLQ konusuna yönlendirilip karantinaya alınır.</div>
+            </div>
+
+            <div class="code-box">
+// DeadLetterPublishingRecoverer Routing
+DeadLetterPublishingRecoverer recoverer = 
+    new DeadLetterPublishingRecoverer(kafkaTemplate, 
+        (rec, ex) -&gt; new TopicPartition("file-vault-events.DLQ", 0));
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="author-info">
+                <div>
+                    <div class="author-name">ahmetfurkankisacik.com</div>
+                    <div class="author-role">Event-Driven Resiliency</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Kaydırın ➔</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: DOCKER COMPOSE & OPEN SOURCE -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">DOCKER ORKESTRASYONU</span>
+            <span class="slide-number">05 / 06</span>
+        </div>
+        <div class="slide-body">
+            <h2 class="hero-title" style="font-size: 52px;">Multi-Container <span class="gradient-text-purple">Docker Compose</span></h2>
+            
+            <div class="card-box">
+                <div class="card-box-title">🐳 Tek Komutla Tüm Sistemi Kaldırma</div>
+                <div class="card-box-desc">Zookeeper, Kafka, PostgreSQL, Auth Service, Vault Event Service ve API Gateway konteyner ağı üzerinden birbirine bağlı çalışır.</div>
+            </div>
+
+            <div class="code-box">
+# Tek komutla tüm altyapıyı derleme ve başlatma
+docker compose up --build -d
+            </div>
+
+            <div class="card-box" style="margin-top: 24px;">
+                <div class="card-box-title">💻 Açık Kaynak GitHub Deposu</div>
+                <div class="card-box-desc">github.com/ahmetfurkankisacik/CloudVault-Security</div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <div class="author-info">
+                <div>
+                    <div class="author-name">ahmetfurkankisacik.com</div>
+                    <div class="author-role">Docker &amp; Infrastructure</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Kaydırın ➔</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: OUTRO & MEDIUM LINK -->
+    <div class="slide">
+        <div class="slide-header">
+            <span class="brand-badge">REHBER MAKALE</span>
+            <span class="slide-number">06 / 06</span>
+        </div>
+        <div class="slide-body" style="text-align: center; align-items: center;">
+            <div style="font-size: 100px; margin-bottom: 20px;">📰</div>
+            <h2 class="hero-title" style="font-size: 54px; text-align: center;">Dev Rehber Makale <span class="gradient-text-cyan">Medium'da Yayında!</span></h2>
+            <p class="hero-subtitle" style="text-align: center; max-width: 800px;">Makalenin tamamını okumak, kod incelemelerini yapmak ve kişisel portföyümü incelemek için profildeki linke tıklayabilirsiniz.</p>
+            
+            <div class="badge-grid" style="justify-content: center; margin-top: 30px;">
+                <span class="badge-item highlight" style="font-size: 26px; padding: 18px 36px;">medium.com/@ahmetfurkankisacik</span>
+                <span class="badge-item highlight" style="font-size: 26px; padding: 18px 36px;">ahmetfurkankisacik.com</span>
+            </div>
+        </div>
+        <div class="slide-footer" style="width: 100%;">
+            <div class="author-info">
+                <img src="images/avatar.jpg" class="author-avatar" alt="AFK">
+                <div>
+                    <div class="author-name">Ahmet Furkan Kısacık</div>
+                    <div class="author-role">Bilgisayar Mühendisi &amp; Eğitmen</div>
+                </div>
+            </div>
+            <span class="swipe-hint">Teşekkürler! 🙏</span>
+        </div>
+    </div>
+
+</body>
+</html>

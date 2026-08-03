@@ -119,7 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'article-2-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Spring Boot projelerinde katmanlı mimari ilkeleri, DTO veri izolasyonu ve @RestControllerAdvice ile sürdürülebilir hata yönetimi standartları.',
             'article-3-title': 'Bir Eğitmenin ve Yazılım Mühendisinin Gözünden: Spring Boot 3 ve Apache Kafka İle Event-Driven Microservices: Asenkron Mesajlaşma ve Resiliency (Retry / DLQ) Mimarisi',
             'article-3-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Asenkron mesajlaşma, Kafka Producer/Consumer yapıları, Retry ve Dead Letter Queue (DLQ) mimarileriyle ilgili dev rehber makalemiz yayında!',
-            'article-upcoming-badge': 'Yakında (3 Ağustos)',
+            'article-4-title': 'Bir Eğitmenin ve Yazılım Mühendisinin Gözünden: Distributed Tracing & Centralized Logging: Zipkin, ELK Stack ve Prometheus/Grafana İle Mikroservis İzlenebilirliği',
+            'article-4-desc': 'Bir eğitmen ve yazılım mühendisinin gözünden: Mikroservis mimarilerinde distributed tracing (Trace ID / Span ID), Zipkin ile istek takibi ve ELK/Grafana ile merkezi izleme standartları 10 Ağustos Pazartesi günü yayınlanacaktır.',
+            'article-upcoming-badge-aug10': 'Yakında (10 Ağustos)',
             'article-upcoming-btn': 'Hazırlanıyor...',
             'blog-read-btn': 'Medium\'da Oku',
             
@@ -242,7 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'article-2-desc': 'From the perspective of an instructor and software engineer: Layered architecture principles, DTO data isolation, and sustainable exception handling standards in Spring Boot.',
             'article-3-title': 'From the Perspective of an Instructor & Software Engineer: Event-Driven Microservices with Spring Boot 3 & Apache Kafka',
             'article-3-desc': 'From the perspective of an instructor and software engineer: A comprehensive guide on asynchronous messaging, Kafka Producers/Consumers, Retries, and Dead Letter Queues (DLQ) is now live!',
-            'article-upcoming-badge': 'Coming Soon (Aug 3)',
+            'article-4-title': 'From the Perspective of an Instructor & Software Engineer: Distributed Tracing & Centralized Logging with Zipkin, ELK Stack, and Prometheus/Grafana',
+            'article-4-desc': 'From the perspective of an instructor and software engineer: Distributed tracing with Trace/Span IDs, request flow tracking with Zipkin, and centralized observability standards launching Monday, August 10.',
+            'article-upcoming-badge-aug10': 'Coming Soon (Aug 10)',
             'article-upcoming-btn': 'In Progress...',
             'blog-read-btn': 'Read on Medium',
             

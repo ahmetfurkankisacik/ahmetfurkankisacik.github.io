@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bir Eğitmenin ve Yazılım Mühendisinin Gözünden: Spring Boot 3 ve Apache Kafka İle Event-Driven Microservices — Ahmet Furkan Kısacık</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --accent: #a855f7;
+            --dark: #0f172a;
+            --light-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --code-bg: #0f172a;
+            --code-text: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(168, 85, 247, 0.35);
+        }
+
+        .article-header {
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .article-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .article-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 32px 0 16px 0;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: #334155;
+        }
+
+        blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid var(--accent);
+            padding: 16px 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #475569;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.6;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .bad-practice {
+            background-color: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .bad-practice pre {
+            background-color: #4c0519;
+            color: #ffe4e6;
+            border-color: #9f1239;
+        }
+
+        .good-practice {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .good-practice pre {
+            background-color: #052e16;
+            color: #dcfce7;
+            border-color: #15803d;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #f1f5f9;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .header-actions {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+            }
+            pre {
+                white-space: pre-wrap;
+                word-break: break-all;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-actions">
+            <button class="btn-print" onclick="window.print()">PDF Olarak İndir / Yazdır 🖨️</button>
+        </div>
+
+        <header class="article-header">
+            <h1 class="article-title">Bir Eğitmenin ve Yazılım Mühendisinin Gözünden: Spring Boot 3 ve Apache Kafka İle Event-Driven Microservices: Asenkron Mesajlaşma ve Resiliency (Retry / DLQ) Mimarisi</h1>
+            <p class="article-subtitle">Spring Boot projelerinde event-driven mikroservis mimarileri, Kafka asenkron mesajlaşma ve Dead Letter Queue (DLQ) standartları.</p>
+            
+            <div class="author-card">
+                <div class="author-avatar">AFK</div>
+                <div class="author-info">
+                    <h4>Ahmet Furkan Kısacık</h4>
+                    <p>Computer Engineer &amp; Software Development Instructor — ahmetfurkankisacik.com</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="article-content">
+            <p>Günümüz modern ve yüksek trafikli sistemlerinde monolitik (tek parça) mimariler, servislerin birbirine sıkı sıkıya bağlı (tightly coupled) olması ve eşzamanlı (synchronous) senkron çağrıların getirdiği gecikmeler (latency) nedeniyle yetersiz kalmaktadır.</p>
+
+            <p>Bu rehber makalemizde, gerçek hayat kurumsal senaryolarında sıklıkla kullanılan <strong>CloudVault-Security</strong> mimarisini inceleyeceğiz. Sistemimiz şu temel bileşenlerden oluşmaktadır:</p>
+
+            <ul>
+                <li><strong>api-gateway (Port: 8080):</strong> Spring Cloud Gateway (WebFlux) ile reaktif yönlendirme ve oran sınırlama (Rate Limiting).</li>
+                <li><strong>auth-service (Port: 8081):</strong> Spring Security 6 &amp; JJWT 0.12.5 tabanlı OAuth2 Authorization Server (Access &amp; Refresh Token Rotasyonu).</li>
+                <li><strong>vault-event-service (Port: 8082):</strong> Apache Kafka tabanlı asenkron olay üretimi (Producer) ve tüketimi (Consumer).</li>
+                <li><strong>Resiliency &amp; Fault Tolerance:</strong> Otomatik tekrar deneme (Exponential Backoff Retry) ve işlenemeyen mesajların karantinaya alındığı <strong>Dead Letter Queue (DLQ)</strong> yapısı.</li>
+            </ul>
+
+            <blockquote>
+                "İyi bir mimari; sadece sistem çalışırken değil, sistemde beklenmedik bir hata veya ağ kesintisi oluştuğunda bile mesaj kaybını sıfıra indirebilen mimaridir."
+            </blockquote>
+
+            <h2>1. Spring Kafka Producer (Olay Üretici)</h2>
+            <p>Bir olay tetiklendiğinde (örneğin dosya yüklendiğinde), <code>KafkaTemplate</code> vasıtasıyla mesaj Kafka başlığına (topic) asenkron olarak iletilir:</p>
+
+            <div class="good-practice">
+                <strong>✅ Spring Kafka Producer Konfigürasyonu:</strong>
+<pre><code>@Component
+public class VaultEventProducer {
+
+    private static final Logger log = LoggerFactory.getLogger(VaultEventProducer.class);
+    private final KafkaTemplate&lt;String, FileVaultEvent&gt; kafkaTemplate;
+
+    public VaultEventProducer(KafkaTemplate&lt;String, FileVaultEvent&gt; kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    public CompletableFuture&lt;SendResult&lt;String, FileVaultEvent&gt;&gt; sendEvent(String topic, FileVaultEvent event) {
+        log.info("Publishing FileVaultEvent to Kafka topic [{}]: EventID={}, FileID={}",
+                topic, event.getEventId(), event.getFileId());
+
+        CompletableFuture&lt;SendResult&lt;String, FileVaultEvent&gt;&gt; future = kafkaTemplate.send(topic, event.getFileId(), event);
+
+        future.whenComplete((result, ex) -&gt; {
+            if (ex == null) {
+                log.info("Event successfully sent to topic [{}] partition [{}] at offset [{}]",
+                        topic, result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
+            } else {
+                log.error("Failed to send Event [{}] to topic [{}]: {}", event.getEventId(), topic, ex.getMessage());
+            }
+        });
+
+        return future;
+    }
+}</code></pre>
+            </div>
+
+            <h2>2. Hata Toleransı: Retry &amp; Dead Letter Queue (DLQ) Konfigürasyonu</h2>
+            <p>Mülakatların ve kurumsal mimarilerin en kritik konusu: <em>"Tüketici (Consumer) tarafında bir veritabanı kesintisi veya hata yaşanırsa mesaja ne olur?"</em></p>
+
+            <p>Spring Kafka'da <code>DefaultErrorHandler</code> ve <code>DeadLetterPublishingRecoverer</code> kullanarak belirli sayıda tekrar deneme yapıp, ardından mesajı karantina başlığına (<code>file-vault-events.DLQ</code>) yönlendiriyoruz:</p>
+
+            <div class="good-practice">
+                <strong>✅ Retry &amp; DLQ Recovery Konfigürasyonu:</strong>
+<pre><code>@Configuration
+public class KafkaConfig {
+
+    @Bean
+    public DefaultErrorHandler errorHandler(KafkaTemplate&lt;String, FileVaultEvent&gt; kafkaTemplate) {
+        DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate,
+                (record, ex) -&gt; {
+                    log.error("Retries exhausted for record in topic [{}] partition [{}] offset [{}]. Routing to DLQ...",
+                            record.topic(), record.partition(), record.offset());
+                    return new TopicPartition("file-vault-events.DLQ", 0);
+                });
+
+        // 3 kere dene, her deneme arasında 1000ms bekle
+        FixedBackOff backOff = new FixedBackOff(1000L, 2L);
+        DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, backOff);
+
+        errorHandler.setRetryListeners((record, ex, deliveryAttempt) -&gt;
+                log.warn("Retry attempt #{} failed for Event ID [{}] in topic [{}]: {}",
+                        deliveryAttempt, record.key(), record.topic(), ex.getMessage())
+        );
+
+        return errorHandler;
+    }
+}</code></pre>
+            </div>
+
+            <h2>3. DLQ Karantina Tüketicisi (DlqConsumer)</h2>
+            <p>DLQ konusuna düşen hatalı mesajlar, sistem yöneticilerine alarm göndermek veya manuel inceleme için <code>DlqConsumer</code> bileşeni tarafından yakalanır:</p>
+
+            <div class="good-practice">
+                <strong>✅ DLQ Listener:</strong>
+<pre><code>@Component
+public class DlqConsumer {
+
+    private static final Logger log = LoggerFactory.getLogger(DlqConsumer.class);
+
+    @KafkaListener(topics = "file-vault-events.DLQ", groupId = "cloudvault-dlq-group")
+    public void consumeDlq(FileVaultEvent event) {
+        log.warn("🚨 ALERT: Received event in Dead Letter Queue (DLQ)! EventID={}, FileID={}, Filename={}",
+                event.getEventId(), event.getFileId(), event.getFilename());
+        // Manuel inceleme, veritabanına kayıt veya Slack/Email alarmı tetikleme
+    }
+}</code></pre>
+            </div>
+
+            <h2>4. Docker Compose Orkestrasyonu</h2>
+            <p>Tüm sistemi (Zookeeper, Kafka, PostgreSQL, Auth Service, Vault Event Service, API Gateway) tek bir komutla başlatmak için <code>docker-compose.yml</code>:</p>
+
+<pre><code># Tüm mikroservisleri ve altyapıyı konteynerlaştırarak başlatma
+docker compose up --build -d</code></pre>
+
+            <h2>💡 Bir Eğitmen ve Yazılım Mühendisinin Gözünden Tavsiyeler</h2>
+            <p>100'den fazla öğrenciye yazılım mimarisi eğitimi vermiş bir eğitmen ve aktif sahada kod geliştiren bir mühendis olarak, Event-Driven mikroservis dünyasına adım atan meslektaşlarıma şu altın tavsiyeleri vermek isterim:</p>
+
+            <ul>
+                <li><strong>Idempotency (Yinelemesiz İşleme) Hayati Önem Taşır:</strong> Kafka'da varsayılan olarak <em>"At-Least-Once Delivery"</em> garantisi bulunur. Production ortamlarında tüketicilerinizi (Consumer) mutlaka <code>eventId</code> kontrolü ile Idempotent tasarlayın.</li>
+                <li><strong>Dead Letter Queue (DLQ) Bir Çöp Kovası Değildir:</strong> Orası sisteminizin Karantina Merkezidir. DLQ konusuna mesaj düştüğünde ekibinize anında bildirim gönderen (Slack/PagerDuty) bir izleme altyapısı kurun.</li>
+                <li><strong>Mülakatlarda "Neden Kafka?" Sorusuna Doğru Yanıt Verin:</strong> Mülakatlarda sadece <em>"Çok hızlı olduğu için"</em> demek yerine <em>"Mikroservisler arasındaki bağımlılığı sıfıra indirmek, asenkron yük dengelemesi sağlamak ve Retry/DLQ ile veri kaybını önlemek için"</em> yanıtını verin.</li>
+                <li><strong>Sadece Kod Yazmayın, Orkestrasyona da Hakim Olun:</strong> Sisteminizin bağımlılıklarını <code>docker-compose.yml</code> ile tek komutta ayağa kaldırabilecek seviyede Konteyner hakimiyetine sahip olun.</li>
+            </ul>
+
+            <div class="footer-note">
+                <p><strong>Açık Kaynak Proje Kodları:</strong> github.com/ahmetfurkankisacik/CloudVault-Security</p>
+                <p><strong>Kişisel Portföy &amp; Web Sitesi:</strong> ahmetfurkankisacik.com</p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
